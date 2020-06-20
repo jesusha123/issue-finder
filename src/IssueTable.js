@@ -13,7 +13,24 @@ class IssueTable extends React.Component {
 
   componentDidMount() {
     const octokit = new Octokit();
-    const q = "repo:kubernetes/kubernetes is:issue is:open no:assignee author:BenTheElder";
+
+    let base_parms = [
+      "repo:kubernetes/kubernetes",
+      "is:issue",
+      "is:open",
+      "no:assignee"
+    ]
+    let authors = [
+      "BenTheElder",
+      "liggitt",
+      "dims",
+      "Huang-Wei",
+      "saad-ali",
+      "verult"
+    ]
+
+    const q = base_parms.join(" ") + " " + authors.map(a => "author:"+a).join(" ")
+
     octokit.search
       .issuesAndPullRequests({ q })
       .then(({ data }) => {
