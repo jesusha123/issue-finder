@@ -25,6 +25,7 @@ class IssueTable extends React.Component {
             author: item.user.login,
             labels: item.labels.map((l) => {return l.name}).join(" "),
             date: item.created_at,
+            link: "https://github.com/kubernetes/kubernetes/issues/"+item.number,
           } 
         })
 

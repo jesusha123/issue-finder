@@ -3,7 +3,7 @@ import React from 'react';
 function IssueRow(props) {
   return (
     <tr>
-      <td>{props.issue.number}</td>
+      <td><a href={props.issue.link}>{props.issue.number}</a></td>
       <td>{props.issue.title}</td>
       <td>{props.issue.author}</td>
       <td>{props.issue.labels}</td>
