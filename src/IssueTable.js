@@ -41,7 +41,9 @@ class IssueTable extends React.Component {
           author: item.user.login,
           labels: item.labels.map(l => ({ 
             id: l.id, 
-            name: l.name })),
+            name: l.name,
+            color: l.color
+          })),
           date: item.created_at,
           link: "https://github.com/kubernetes/kubernetes/issues/"+item.number,
         }))
