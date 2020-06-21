@@ -1,10 +1,21 @@
 import React from 'react';
 
-function LabelCell(props) {
-  const labelButtons = props.labels.map(l => 
-    <button key={l.id} type="button" style={{ backgroundColor: '#'+l.color }}>{l.name}</button>
-  );
+function getContrastYIQ(hexcolor){
+    hexcolor = hexcolor.replace("#", "");
+    var r = parseInt(hexcolor.substr(0,2),16);
+    var g = parseInt(hexcolor.substr(2,2),16);
+    var b = parseInt(hexcolor.substr(4,2),16);
+    var yiq = ((r*299)+(g*587)+(b*114))/1000;
+    return (yiq >= 128) ? 'black' : 'white';
+}
 
+function LabelCell(props) {
+  const labelButtons = props.labels.map(l => {
+      let color = getContrastYIQ(l.color)
+      return <button key={l.id} type="button" style={{ backgroundColor: '#'+l.color, color: color }}>{l.name}</button>
+    }
+  );
+  
   return (
       <td>{labelButtons}</td>
   );
