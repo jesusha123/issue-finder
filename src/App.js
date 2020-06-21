@@ -3,6 +3,9 @@ import './App.css';
 import IssueTable from './IssueTable'
 import { Octokit } from '@octokit/rest'
 
+
+const octokit = new Octokit();
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -17,11 +20,16 @@ class App extends React.Component {
         "verult"
       ]
     };
+
+    this.handleAuthorInput = this.handleAuthorInput.bind(this);
   }
 
-  componentDidMount() {
-    const octokit = new Octokit();
+  handleAuthorInput(event) {
+    let authors = event.target.value.split(",")
+    this.refreshIssues(authors)
+  }
 
+  refreshIssues(authors) {
     let base_parms = [
       "repo:kubernetes/kubernetes",
       "is:issue",
@@ -29,7 +37,7 @@ class App extends React.Component {
       "no:assignee"
     ]
 
-    const q = base_parms.join(" ") + " " + this.state.authors.map(a => "author:"+a).join(" ")
+    const q = base_parms.join(" ") + " " + authors.map(a => "author:"+a).join(" ")
 
     octokit.search
       .issuesAndPullRequests({ q })
@@ -49,15 +57,20 @@ class App extends React.Component {
         }))
 
         this.setState({
-          issues: issues
+          issues: issues,
+          authors: authors
         });
       });
+  }
+
+  componentDidMount() {
+    this.refreshIssues(this.state.authors)
   }
 
   render() {
     return (
       <div className="App">
-        <input class="form-control" type="text" placeholder="Authors" value={this.state.authors} />
+        <input type="text" placeholder="Authors" value={this.state.authors} onChange={this.handleAuthorInput} />
         <IssueTable issues={this.state.issues} />
       </div>
     );

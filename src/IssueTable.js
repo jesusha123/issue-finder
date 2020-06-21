@@ -3,10 +3,6 @@ import './IssueTable.css';
 import IssueRow from './IssueRow';
 
 class IssueTable extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     const listItems = this.props.issues.map((issue) => 
       <IssueRow key={issue.number} issue={issue} />
