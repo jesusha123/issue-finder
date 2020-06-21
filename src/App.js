@@ -26,10 +26,13 @@ class App extends React.Component {
 
   handleAuthorInput(event) {
     let authors = event.target.value.split(",")
-    this.refreshIssues(authors)
+
+    this.setState({
+      authors: authors
+    }, this.refreshIssues);
   }
 
-  refreshIssues(authors) {
+  refreshIssues() {
     let base_parms = [
       "repo:kubernetes/kubernetes",
       "is:issue",
@@ -37,7 +40,7 @@ class App extends React.Component {
       "no:assignee"
     ]
 
-    const q = base_parms.join(" ") + " " + authors.map(a => "author:"+a).join(" ")
+    const q = base_parms.join(" ") + " " + this.state.authors.map(a => "author:"+a).join(" ")
 
     octokit.search
       .issuesAndPullRequests({ q })
@@ -57,20 +60,22 @@ class App extends React.Component {
         }))
 
         this.setState({
-          issues: issues,
-          authors: authors
+          issues: issues
         });
       });
   }
 
   componentDidMount() {
-    this.refreshIssues(this.state.authors)
+    this.refreshIssues()
   }
 
   render() {
     return (
       <div className="App">
-        <input type="text" placeholder="Authors" value={this.state.authors} onChange={this.handleAuthorInput} />
+        <label htmlFor="authorsInput">Authors</label>
+        <input type="text" id="authorsInput" placeholder="Authors" value={this.state.authors} onChange={this.handleAuthorInput} />
+        <input type="checkbox" value="" id="helpWantedCheckbox" />
+        <label htmlFor="helpWantedCheckbox">Help Wanted</label>
         <IssueTable issues={this.state.issues} />
       </div>
     );
