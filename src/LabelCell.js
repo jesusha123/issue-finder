@@ -2,7 +2,7 @@ import React from 'react';
 
 function LabelCell(props) {
   const labelButtons = props.labels.map(l => 
-    <button type="button">{l}</button>
+    <button key={l.id} type="button">{l.name}</button>
   );
 
   return (

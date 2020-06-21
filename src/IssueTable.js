@@ -35,16 +35,16 @@ class IssueTable extends React.Component {
       .issuesAndPullRequests({ q })
       .then(({ data }) => {
         console.log(data)
-        let issues = data.items.map((item) => { 
-          return {
-            number: item.number,
-            title: item.title,
-            author: item.user.login,
-            labels: item.labels.map(l => l.name),
-            date: item.created_at,
-            link: "https://github.com/kubernetes/kubernetes/issues/"+item.number,
-          } 
-        })
+        let issues = data.items.map((item) => ({ 
+          number: item.number,
+          title: item.title,
+          author: item.user.login,
+          labels: item.labels.map(l => ({ 
+            id: l.id, 
+            name: l.name })),
+          date: item.created_at,
+          link: "https://github.com/kubernetes/kubernetes/issues/"+item.number,
+        }))
 
         this.setState({
           issues: issues
