@@ -7,7 +7,7 @@ class IssueTable extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      issues: []
+      issues: [],
     };
   }
 
@@ -20,16 +20,8 @@ class IssueTable extends React.Component {
       "is:open",
       "no:assignee"
     ]
-    let authors = [
-      "BenTheElder",
-      "liggitt",
-      "dims",
-      "Huang-Wei",
-      "saad-ali",
-      "verult"
-    ]
 
-    const q = base_parms.join(" ") + " " + authors.map(a => "author:"+a).join(" ")
+    const q = base_parms.join(" ") + " " + this.props.authors.map(a => "author:"+a).join(" ")
 
     octokit.search
       .issuesAndPullRequests({ q })
