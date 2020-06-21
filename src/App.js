@@ -26,15 +26,15 @@ class App extends React.Component {
 
     this.setState({
       authors: authors
-    }, this.refreshIssues);
+    }, this.refreshIssues(this.state));
   }
 
   handleHelpWantedChange(event) {
     console.log("Changing help wanted")
   }
 
-  refreshIssues() {
-    findIssues(this.state.authors, (issues) => {
+  refreshIssues(state) {
+    findIssues(state, (issues) => {
       this.setState({
         issues: issues
       });
@@ -42,7 +42,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.refreshIssues()
+    this.refreshIssues(this.state)
   }
 
   render() {

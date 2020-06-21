@@ -2,7 +2,7 @@ import { Octokit } from '@octokit/rest'
 
 const octokit = new Octokit();
 
-function findIssues(authors, callback) {
+function findIssues(state, callback) {
   let base_parms = [
     "repo:kubernetes/kubernetes",
     "is:issue",
@@ -10,7 +10,7 @@ function findIssues(authors, callback) {
     "no:assignee"
   ]
 
-  const q = base_parms.join(" ") + " " + authors.map(a => "author:"+a).join(" ")
+  const q = base_parms.join(" ") + " " + state.authors.map(a => "author:"+a).join(" ")
 
   octokit.search
     .issuesAndPullRequests({ q })
