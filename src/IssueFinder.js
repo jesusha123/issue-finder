@@ -10,7 +10,12 @@ function findIssues(state, callback) {
     "no:assignee"
   ]
 
+  if(state.helpWantedLabel) {
+    base_parms.push("label:\"help wanted\"")
+  }
+
   const q = base_parms.join(" ") + " " + state.authors.map(a => "author:"+a).join(" ")
+  console.log(q)
 
   octokit.search
     .issuesAndPullRequests({ q })
