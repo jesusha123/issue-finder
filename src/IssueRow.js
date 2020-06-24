@@ -10,6 +10,7 @@ function IssueRow(props) {
       <LabelCell labels={props.issue.labels} />
       <td>{props.issue.comments}</td>
       <td>{props.issue.date}</td>
+      <td>{props.issue.updated_at}</td>
     </tr>
   );
 }
