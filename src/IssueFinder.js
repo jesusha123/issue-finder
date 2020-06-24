@@ -14,7 +14,8 @@ function findIssues(state, callback) {
     base_parms.push("label:\"help wanted\"")
   }
 
-  const q = base_parms.join(" ") + " " + state.authors.map(a => "author:"+a).join(" ")
+  let authors = state.authors.split(",").filter(a => a.length>0);
+  const q = base_parms.join(" ") + " " + authors.map(a => "author:"+a).join(" ")
   console.log(q)
 
   octokit.search
