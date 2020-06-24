@@ -8,6 +8,7 @@ function IssueRow(props) {
       <td>{props.issue.title}</td>
       <td>{props.issue.author}</td>
       <LabelCell labels={props.issue.labels} />
+      <td>{props.issue.comments}</td>
       <td>{props.issue.date}</td>
     </tr>
   );

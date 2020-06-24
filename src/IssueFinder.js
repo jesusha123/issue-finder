@@ -27,6 +27,7 @@ function findIssues(state, callback) {
         number: item.number,
         title: item.title,
         author: item.user.login,
+        comments: item.comments,
         labels: item.labels.map(l => ({ 
           id: l.id, 
           name: l.name,

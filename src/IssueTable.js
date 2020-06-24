@@ -16,6 +16,7 @@ class IssueTable extends React.Component {
             <th>Title</th>
             <th>Author</th>
             <th>Labels</th>
+            <th>Comments</th>
             <th>Date</th>
           </tr>
        </thead>
