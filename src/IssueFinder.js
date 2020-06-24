@@ -16,10 +16,11 @@ function findIssues(state, callback) {
 
   let authors = state.authors.split(",").filter(a => a.length>0);
   const q = base_parms.join(" ") + " " + authors.map(a => "author:"+a).join(" ")
+  const per_page = 100
   console.log(q)
 
   octokit.search
-    .issuesAndPullRequests({ q })
+    .issuesAndPullRequests({ q, per_page })
     .then(({ data }) => {
       console.log(data)
       let issues = data.items.map((item) => ({ 
