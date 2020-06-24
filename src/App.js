@@ -9,7 +9,7 @@ class App extends React.Component {
     this.state = {
       issues: [],
       helpWantedLabel: false,
-      authors: "BenTheElder,liggitt,dims,Huang-Wei,saad-ali,verult"
+      authors: ''
     };
 
     this.handleAuthorInput = this.handleAuthorInput.bind(this);
