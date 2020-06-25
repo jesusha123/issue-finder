@@ -6,9 +6,12 @@ function findIssues(state, callback) {
   let base_parms = [
     "repo:kubernetes/kubernetes",
     "is:issue",
-    "is:open",
-    "no:assignee"
+    "is:open"
   ]
+
+  if(state.unassigned) {
+    base_parms.push("no:assignee")
+  }
 
   if(state.helpWantedLabel) {
     base_parms.push("label:\"help wanted\"")
@@ -28,6 +31,7 @@ function findIssues(state, callback) {
         title: item.title,
         author: item.user.login,
         comments: item.comments,
+        assignee: item.assignee,
         labels: item.labels.map(l => ({ 
           id: l.id, 
           name: l.name,

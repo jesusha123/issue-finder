@@ -9,11 +9,13 @@ class App extends React.Component {
     this.state = {
       issues: [],
       helpWantedLabel: false,
+      unassigned: true,
       authors: ''
     };
 
     this.handleAuthorInput = this.handleAuthorInput.bind(this);
     this.handleHelpWantedChange = this.handleHelpWantedChange.bind(this);
+    this.handleUnassignedChange = this.handleUnassignedChange.bind(this);
     this.clearAuthors = this.clearAuthors.bind(this);
   }
 
@@ -30,6 +32,13 @@ class App extends React.Component {
     console.log("Incoming state: " + event.target.checked);
     this.setState({
       helpWantedLabel: event.target.checked
+    }, () => { this.refreshIssues(this.state) });
+  }
+
+  handleUnassignedChange(event) {
+    console.log("Incoming unassigned state: " + event.target.checked);
+    this.setState({
+      unassigned: event.target.checked
     }, () => { this.refreshIssues(this.state) });
   }
 
@@ -60,6 +69,8 @@ class App extends React.Component {
         <button onClick={this.clearAuthors}>Clear Authors</button>
         <input type="checkbox" value="" id="helpWantedCheckbox" onChange={this.handleHelpWantedChange} checked={this.state.helpWantedLabel} />
         <label htmlFor="helpWantedCheckbox">Help Wanted</label>
+        <input type="checkbox" value="" id="unassignedCheckbox" onChange={this.handleUnassignedChange} checked={this.state.unassigned} />
+        <label htmlFor="unassignedCheckbox">Unassigned</label>
         <IssueTable issues={this.state.issues} />
       </div>
     );
