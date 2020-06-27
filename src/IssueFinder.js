@@ -4,7 +4,7 @@ const octokit = new Octokit();
 
 function findIssues(state, callback) {
   let base_parms = [
-    "repo:kubernetes/kubernetes",
+    "repo:" + state.repo,
     "is:issue",
     "is:open"
   ]
