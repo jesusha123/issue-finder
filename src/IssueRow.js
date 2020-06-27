@@ -2,21 +2,25 @@ import React from 'react';
 import LabelCell from './LabelCell';
 
 function IssueRow(props) {
+  let issue = props.issue;
   let assignee = '';
-  if(props.issue.assignee) {
-    assignee = props.issue.assignee.login;
+  if(issue.assignee) {
+    assignee = issue.assignee.login;
   }
+
+  let deltaDaysNoUpdate = Math.ceil((issue.updated_at - issue.date) / (1000*60*60*24));
 
   return (
     <tr>
-      <td><a href={props.issue.link}>{props.issue.number}</a></td>
-      <td>{props.issue.title}</td>
-      <td>{props.issue.author}</td>
-      <LabelCell labels={props.issue.labels} />
-      <td>{props.issue.comments}</td>
+      <td><a href={issue.link}>{issue.number}</a></td>
+      <td>{issue.title}</td>
+      <td>{issue.author}</td>
+      <LabelCell labels={issue.labels} />
+      <td>{issue.comments}</td>
       <td>{assignee}</td>
-      <td>{props.issue.date.toLocaleString()}</td>
-      <td>{props.issue.updated_at.toLocaleString()}</td>
+      <td>{issue.date.toLocaleString()}</td>
+      <td>{issue.updated_at.toLocaleString()}</td>
+      <td>{deltaDaysNoUpdate}</td>
     </tr>
   );
 }

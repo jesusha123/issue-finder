@@ -20,6 +20,7 @@ class IssueTable extends React.Component {
             <th>Assignee</th>
             <th>Date</th>
             <th>Last Update</th>
+            <th>Days Since Update</th>
           </tr>
        </thead>
        <tbody>
