@@ -15,8 +15,8 @@ function IssueRow(props) {
       <LabelCell labels={props.issue.labels} />
       <td>{props.issue.comments}</td>
       <td>{assignee}</td>
-      <td>{props.issue.date}</td>
-      <td>{props.issue.updated_at}</td>
+      <td>{props.issue.date.toLocaleString()}</td>
+      <td>{props.issue.updated_at.toLocaleString()}</td>
     </tr>
   );
 }
