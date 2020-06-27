@@ -39,7 +39,7 @@ function findIssues(state, callback) {
         })),
         date: new Date(item.created_at),
         updated_at: new Date(item.updated_at),
-        link: "https://github.com/kubernetes/kubernetes/issues/"+item.number,
+        link: "https://github.com/" + state.repo + "/issues/" + item.number,
       }))
 
       callback(issues)
