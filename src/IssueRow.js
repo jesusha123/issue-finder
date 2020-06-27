@@ -8,7 +8,8 @@ function IssueRow(props) {
     assignee = issue.assignee.login;
   }
 
-  let deltaDaysNoUpdate = Math.ceil((issue.updated_at - issue.date) / (1000*60*60*24));
+  let now = Date.now();
+  let deltaDaysNoUpdate = Math.ceil((now - issue.updated_at) / (1000*60*60*24));
 
   return (
     <tr>
